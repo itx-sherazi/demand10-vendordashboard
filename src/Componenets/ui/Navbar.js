@@ -178,7 +178,7 @@ const Navbar = ({ categories = [] }) => {
             <Link href="https://demand10.com" className="flex-shrink-0">
               <div className="flex items-center">
                 <Image
-                  src="https://demand10.com/images/blue_logo.png"
+                  src="https://demand10.com/images/logo.png"
                   width={140}
                   height={60}
                   alt="Logo"
@@ -344,7 +344,7 @@ const Navbar = ({ categories = [] }) => {
             <div className="flex items-center justify-between p-4 border-b">
               <Link href="https://demand10.com" onClick={toggleMobileMenu} className="flex-shrink-0">
                 <Image
-                  src="https://demand10.com/images/blue_logo.png"
+                  src="https://demand10.com/images/logo.png"
                   width={140}
                   height={60}
                   alt="Logo"
@@ -475,7 +475,7 @@ const Navbar = ({ categories = [] }) => {
                       href="https://www.facebook.com/people/Intentwire/61572572363704/"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-gray-900 hover:text-[#4ecfc5] transition-colors"
+                      className="text-gray-900 hover:text-[#1a365d] transition-colors"
                     >
                       <Facebook className="h-4 w-4" />
                     </a>
@@ -484,7 +484,7 @@ const Navbar = ({ categories = [] }) => {
                       href="https://www.linkedin.com/company/intentwire/posts/?feedView=all"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-gray-900 hover:text-[#4ecfc5] transition-colors"
+                      className="text-gray-900 hover:text-[#1a365d] transition-colors"
                     >
                       <Linkedin className="h-4 w-4" />
                     </a>

@@ -23,6 +23,11 @@ const nextConfig = {
         hostname: 'api.demand10.com',
         pathname: '/badges/**',
       },
+       // Add the Amazon S3 bucket for intent-wire images
+      {
+        protocol: 'https',
+        hostname: 'amzn-s3-intent-wire.s3.amazonaws.com',
+      },
     ],
   },
 };

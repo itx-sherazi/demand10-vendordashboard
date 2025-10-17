@@ -15,7 +15,6 @@ import {
   FaCheck,
   FaCircle,
   FaAdjust,
-  FaEye,
   FaInfoCircle,
   FaSave,
   FaArrowLeft,
@@ -95,25 +94,7 @@ export default function CompanyEditForm({ slug, onBack }) {
     }
   ];
 
-  // Countries list
-  const countries = [
-    'United States', 'Canada', 'United Kingdom', 'Germany', 'France', 'Australia',
-    'India', 'Japan', 'China', 'Brazil', 'Mexico', 'Spain', 'Italy', 'Netherlands',
-    'Sweden', 'Norway', 'Denmark', 'Finland', 'Switzerland', 'Austria', 'Belgium',
-    'Portugal', 'Ireland', 'New Zealand', 'South Africa', 'Singapore', 'Hong Kong',
-    'South Korea', 'Taiwan', 'Thailand', 'Malaysia', 'Philippines', 'Indonesia',
-    'Vietnam', 'Pakistan', 'Bangladesh', 'Sri Lanka', 'Nepal', 'Argentina', 'Chile',
-    'Colombia', 'Peru', 'Venezuela', 'Uruguay', 'Paraguay', 'Bolivia', 'Ecuador',
-    'Costa Rica', 'Panama', 'Guatemala', 'Honduras', 'Nicaragua', 'El Salvador',
-    'Dominican Republic', 'Jamaica', 'Trinidad and Tobago', 'Barbados', 'Bahamas',
-    'Egypt', 'Nigeria', 'Kenya', 'Ghana', 'Morocco', 'Tunisia', 'Algeria', 'Ethiopia',
-    'Tanzania', 'Uganda', 'Rwanda', 'Botswana', 'Namibia', 'Zambia', 'Zimbabwe',
-    'Israel', 'Turkey', 'Saudi Arabia', 'UAE', 'Qatar', 'Kuwait', 'Bahrain', 'Oman',
-    'Jordan', 'Lebanon', 'Cyprus', 'Malta', 'Luxembourg', 'Iceland', 'Estonia',
-    'Latvia', 'Lithuania', 'Poland', 'Czech Republic', 'Slovakia', 'Hungary',
-    'Romania', 'Bulgaria', 'Croatia', 'Slovenia', 'Serbia', 'Montenegro', 'Bosnia',
-    'North Macedonia', 'Albania', 'Greece', 'Russia', 'Ukraine', 'Belarus', 'Moldova'
-  ].sort();
+
 
   // Generate years for dropdown
   const currentYear = new Date().getFullYear();
@@ -627,7 +608,7 @@ export default function CompanyEditForm({ slug, onBack }) {
     if (imagePath.startsWith('http')) return imagePath;
     
     // If it's a relative path, prepend the API base URL
-    const baseUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:4000/api/v1';
+    const baseUrl = process.env.NEXT_PUBLIC_API_URL || 'https://demand10.com/api/v1';
     // Remove /api/v1 prefix if it exists in the imagePath since uploads are served directly
     const cleanPath = imagePath.startsWith('/api/v1') ? imagePath.substring(7) : imagePath;
     // For uploads, we need to remove the /api/v1 part from the base URL

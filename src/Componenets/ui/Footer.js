@@ -12,7 +12,7 @@ const Footer = () => {
           <div className="lg:col-span-1">
             <div className="mb-6">
               <Image
-                src="https://demand10.com/images/blue_logo.png"
+                src="https://demand10.com/images/logo.png"
                 width={160}
                 height={45}
                 alt="Demand10 Logo"
