@@ -112,13 +112,8 @@ export const userLogout = async () => {
   }
 };
 
-export const checkUserAuth = async (retryCount = 0) => {
+const requestUserAuth = async (retryCount = 0) => {
   try {
-    // Add a small delay to ensure cookies are properly set
-    if (retryCount === 0) {
-      await new Promise(resolve => setTimeout(resolve, 100));
-    }
-    
     const response = await fetch(`${API_BASE_URL}/user`, {
       method: "GET",
       credentials: "include",
@@ -131,7 +126,7 @@ export const checkUserAuth = async (retryCount = 0) => {
       // Retry up to 3 times for 500 errors
       if (response.status >= 500 && retryCount < 3) {
         await new Promise(resolve => setTimeout(resolve, 500 * (retryCount + 1)));
-        return checkUserAuth(retryCount + 1);
+        return requestUserAuth(retryCount + 1);
       }
       
       // For 401 errors (unauthorized), return a specific response
@@ -150,11 +145,22 @@ export const checkUserAuth = async (retryCount = 0) => {
     // Retry up to 3 times for network errors
     if (retryCount < 3) {
       await new Promise(resolve => setTimeout(resolve, 500 * (retryCount + 1)));
-      return checkUserAuth(retryCount + 1);
+      return requestUserAuth(retryCount + 1);
     }
     
     return createErrorResponse("Authentication check failed");
   }
+};
+
+// Navbar, pages and forms often check auth at the same time; share one in-flight request
+let pendingAuthCheck = null;
+export const checkUserAuth = () => {
+  if (!pendingAuthCheck) {
+    pendingAuthCheck = requestUserAuth().finally(() => {
+      pendingAuthCheck = null;
+    });
+  }
+  return pendingAuthCheck;
 };
 
 // Forgot password
@@ -215,7 +221,7 @@ export const submitCompanyClaim = async (claimData) => {
   }
 };
 
-export const getUserClaims = async () => {
+const requestUserClaims = async () => {
   try {
     const response = await fetch(`${API_BASE_URL}/claims/user`, {
       method: "GET",
@@ -231,6 +237,17 @@ export const getUserClaims = async () => {
     console.error("Get user claims error:", error);
     return createErrorResponse("Network error during claims fetch");
   }
+};
+
+// Sidebar and the current page both load claims; share one in-flight request
+let pendingClaims = null;
+export const getUserClaims = () => {
+  if (!pendingClaims) {
+    pendingClaims = requestUserClaims().finally(() => {
+      pendingClaims = null;
+    });
+  }
+  return pendingClaims;
 };
 
 // User Reviews API
@@ -425,7 +442,7 @@ export const submitCompanyListing = async (listingData) => {
 // Search companies
 export const searchCompanies = async (query) => {
   try {
-    const response = await fetch(`${API_BASE_URL}/search-companies?query=${query}`, {
+    const response = await fetch(`${API_BASE_URL}/search-companies?query=${encodeURIComponent(query)}`, {
       method: "GET",
       credentials: "include",
       headers: {
